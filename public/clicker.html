@@ -1,0 +1,409 @@
+<html>
+<title>Clicker Clicker</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+<body onbeforeunload="return closingCode()">
+  <style>
+    body {
+  margin:0px;
+  background-color: #171717;
+  font-family: Arial, sans-serif; 
+}
+.center {
+  margin: 40px;
+}
+h1{
+  color: #a327d0;
+}
+
+.round{
+  font-size: 12px;
+  color: #4D5259;
+  line-height: 1.5;
+  font-weight: bold;
+  padding: .5em 2em;
+  background: #171717;
+  border: 2px solid #4D5259;
+  box-shadow: 4px 4px 0 0 #4D5259;
+  border-radius: 100px;
+  outline:0;
+  transition: ease all .1s;
+} 
+.round:active {
+  transform: translateY(4px) translateX(4px);
+  box-shadow: 0px 0px 0 0 #4D5259;
+}
+.round:hover {
+  background: #d3d3d3;
+}
+
+.settings {
+  font-size: 10px;
+  color: #4D5259;
+  line-height: 1.5;
+  font-weight: bold;
+  padding: .5em 2em;
+  background: #FFFFFF;
+  border: 2px solid #000000;
+  box-shadow: 4px 4px 0 0 #171717;
+  outline:0;
+}
+
+.settings:active {
+  transform: translateY(4px) translateX(4px);
+  box-shadow: 0px 0px 0 0 #000000;
+}
+.settings:hover {
+  background: #d3d3d3;
+}
+  </style>
+    <script>money = 0;
+      moneyup = 1;
+      msec = 0;
+      upcost = 15;
+      catcost = 25;
+      workercost = 250;
+      upown = 0;
+      catown = 0;
+      workerown = 0;
+      catadd = 1;
+      workadd = 15;
+      cboost = 1;
+      wboost = 1;
+      catmax = 0;
+      workmax = 0;
+      
+     
+      
+      function addcomma(x) {
+        return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+      }
+      //updates all values
+      function reloadall() {
+        document.getElementById("click").innerHTML =
+          "Clicker/click: " + addcomma(moneyup) + " | Clicker/sec: " + addcomma(msec);
+        document.getElementById("total").innerHTML = "Clicker: " + addcomma(money);
+        document.getElementById("cat").innerHTML =
+          catown + "-clicker cat: " + addcomma(catcost) + " | +" + addcomma(catadd) + "/sec";
+        document.getElementById("worker").innerHTML =
+          workerown + "-worker: " + addcomma(workercost) + " | +" + addcomma(workadd) + "/sec";
+        document.getElementById("upgrade").innerHTML =
+          addcomma(upown) + "-main upgrade: " + addcomma(upcost);
+      }
+      //overwrites save file
+      function save() {
+        localStorage.setItem("money", money);
+        localStorage.setItem("moneyup", moneyup);
+        localStorage.setItem("msec", msec);
+        localStorage.setItem("upcost", upcost);
+        localStorage.setItem("catcost", catcost);
+        localStorage.setItem("catadd", catadd);
+        localStorage.setItem("workercost", workercost);
+        localStorage.setItem("workadd", workadd);
+        localStorage.setItem("catown", catown);
+        localStorage.setItem("workerown", workerown);
+        localStorage.setItem("upown", upown);
+        localStorage.setItem("catadd", catadd);
+        localStorage.setItem("workadd", workadd);
+        localStorage.setItem("cboost", cboost);
+        localStorage.setItem("wboost", wboost);
+        localStorage.setItem("catmax", catmax);
+        localStorage.setItem("workmax", workmax);
+      }
+      //loads save file
+      function load() {
+        money = parseInt(localStorage.getItem("money"));
+        moneyup = parseInt(localStorage.getItem("moneyup"));
+        msec = parseInt(localStorage.getItem("msec"));
+        upcost = parseInt(localStorage.getItem("upcost"));
+        catcost = parseInt(localStorage.getItem("catcost"));
+        upown = parseInt(localStorage.getItem("catadd"));
+        workercost = parseInt(localStorage.getItem("workercost"));
+        upown = parseInt(localStorage.getItem("workadd"));
+        catown = parseInt(localStorage.getItem("catown"));
+        workerown = parseInt(localStorage.getItem("workerown"));
+        upown = parseInt(localStorage.getItem("upown"));
+        catadd = parseInt(localStorage.getItem("catadd"));
+        workadd = parseInt(localStorage.getItem("workadd"));
+        cboost = parseInt(localStorage.getItem("cboost"));
+        wboost = parseInt(localStorage.getItem("wboost"));
+        catmax = parseInt(localStorage.getItem("catmax"));
+        workmax = parseInt(localStorage.getItem("workmax"));
+      
+        reloadall();
+      }
+      //resets all values
+      function reset() {
+        if (confirm("Are you sure you want to reset?") === true) {
+          money = 0;
+          moneyup = 1;
+          msec = 0;
+          upcost = 15;
+          catcost = 25;
+          workercost = 250;
+          catown = 0;
+          workerown = 0;
+          upown = 0;
+          catadd = 1;
+          workadd = 15;
+          reloadall();
+        }
+      }
+      //timer
+      function myTimer() {
+          money += msec;
+        document.getElementById("total").innerHTML = "Clicker: " + addcomma(money);
+      }
+      setInterval(myTimer, 1000);
+      
+      //what happens when button is clicked
+      function clicked() {
+        money += moneyup;
+        document.getElementById("total").innerHTML = "Clicker: " + addcomma(money);
+      }
+      //upgrade function
+      function upgrade(name) {
+        if (name == "clicker cat") {
+          if (money >= catcost && catown < 50) {
+            
+            if (catown <= 13) {
+              msec += catadd;
+              catadd++;
+              cboost = 1;
+            } else if (catown == 14) {
+              msec += catadd;
+              catadd++;
+              cboost = 200;
+            } else if (catown <= 23) {
+              msec += 200 * catadd;
+              catadd++;
+              cboost = 200;
+            } else if (catown == 24) {
+              msec += 200 * catadd;
+              catadd++;
+              cboost = 5000;
+            } else if (catown <= 48) {
+              msec += 5000 * catadd;
+              catadd++;
+              cboost = 5000;
+            } else if (catown == 49) {
+              msec += 5000 * catadd;
+              catadd++;
+              cboost = 15000;
+            } else {
+              msec += 15000 * catadd;
+              catadd++;
+              cboost = 15000;
+            }
+            catown += 1;
+            money -= catcost;
+            catcost = catcost * 2;
+            document.getElementById("cat").innerHTML =
+              catown + "-clicker cat: " + addcomma(catcost) + " | +" + addcomma(catadd * cboost) + "/sec";
+          } else if (catown == 50) {
+            document.getElementById("cat").innerHTML =
+              catown + "-clicker cat: MAX | +15% click/sec";
+          }
+        }
+      
+        if (name == "worker") {
+          if (money >= workercost && workerown < 50) {
+            
+            if (workerown <= 13) {
+              msec += workadd;
+              workadd++;
+              wboost = 1;
+            } else if (workerown == 14) {
+              msec += workadd;
+              workadd++;
+              wboost = 200;
+            } else if (workerown <= 23) {
+              msec += 200 * workadd;
+              workadd++;
+              wboost = 200;
+            } else if (workerown == 24) {
+              msec += 200 * workadd;
+              workadd++;
+              wboost = 5000;
+            } else if (workerown <= 48) {
+              msec += 5000 * workadd;
+              workadd++;
+              wboost = 5000;
+            } else if (workerown == 49) {
+              msec += 5000 * workadd;
+              workadd++;
+              wboost = 15000;
+            } else {
+              msec += 15000 * workadd;
+              workadd++;
+              wboost = 15000;
+            }
+            workerown += 1;
+            money -= workercost;
+            workercost = workercost * 3;
+            document.getElementById("worker").innerHTML = 
+              workerown + "-worker: " + addcomma(workercost) + " | +" + addcomma(workadd * wboost) + "/sec";
+          } else if (workerown == 50) {
+            document.getElementById("worker").innerHTML =
+              workerown + "-worker: MAX | +35% click/sec";
+          }
+        }
+      
+        if (name == "upgrade") {
+          if (money >= upcost) {
+            moneyup += upcost / 15;
+            money -= upcost;
+            upown += 1;
+            upcost = upcost * 5;
+            document.getElementById("upgrade").innerHTML =
+              addcomma(upown) + "-main upgrade: " + addcomma(upcost);
+            if (catown == 50) {
+              msec -= catmax;
+              catmax = Math.floor(moneyup * 0.15);
+              msec += catmax;
+            }
+            if (workerown == 50) {
+              msec -= workmax;
+              workmax = Math.floor(moneyup * 0.35);
+              msec += workmax;
+            }
+          }
+        }
+      
+        document.getElementById("click").innerHTML =
+          "Clicker/click: " + addcomma(moneyup) + " | Clicker/sec: " + addcomma(msec);
+        document.getElementById("total").innerHTML = "Clicker: " + addcomma(money);
+      }
+
+      var timerInterval;
+
+    function startTimer(durationInSeconds) {
+      var startTime = Date.now();
+      var endTime = startTime + durationInSeconds * 1000;
+      
+      // Disable all timer buttons
+      var timerButtons = document.querySelectorAll('.round');
+      timerButtons.forEach(button => {
+        button.disabled = true;
+      });
+
+      // Start the countdown
+      timerInterval = setInterval(function() {
+        var currentTime = Date.now();
+        var remainingTime = Math.max(0, endTime - currentTime);
+        updateTimerDisplay(remainingTime);
+
+        if (remainingTime <= 0) {
+          clearInterval(timerInterval);
+
+          // Enable all timer buttons
+          timerButtons.forEach(button => {
+            button.disabled = false;
+          });
+          showNotification('Time\'s up!');
+        }
+      }, 1000);
+    }
+
+    function updateTimerDisplay(remainingTime) {
+      var minutes = Math.floor(remainingTime / 60000);
+      var seconds = Math.floor((remainingTime % 60000) / 1000);
+      document.getElementById('time').innerText = 'Time Left: ' + minutes + 'm ' + seconds + 's';
+    }
+    function showNotification(message) {
+  if (Notification.permission === 'granted') {
+    new Notification(message);
+  } else if (Notification.permission !== 'denied') {
+    Notification.requestPermission().then(permission => {
+      if (permission === 'granted') {
+        new Notification(message);
+      }
+    });
+  }
+}
+    function clicked() {
+  // Check if the timer is still running
+  if (timerInterval) {
+    money += moneyup;
+    document.getElementById("total").innerHTML = "Clicker: " + addcomma(money);
+  }
+}
+
+      </script>
+
+    <center class='center'>
+      <h1 id='total'>Clicker: 0</h1>
+      <h1 id='time'>Time:</h1>
+      <img  class="round" src="logo.png" width="300" onclick='clicked()'></img>
+      <br><br>
+      <button class="round" onclick="startTimer(60)">1 Minute</button>
+      <button class="round" onclick="startTimer(180)">3 Minutes</button>
+      <button class="round" onclick="startTimer(300)">5 Minutes</button>
+      <br><br>
+      <button class="round" onclick="reset()">Reset</button><br><br>
+    </center>
+  </link>
+  
+<div id="popup" class="popup-container">
+  <!-- Content for the pop-up -->
+  <span id="popup-message"><center> Chose Game mode w/ friend </center> and click to start</span>
+  <!-- Line animation -->
+  <div class="popup-line"></div>
+</div>
+
+
+<style>
+   .hover-pointer {
+      cursor: pointer;
+  }
+  /* Style for the pop-up container */
+  .popup-container {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #333;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    z-index: 1000;
+    animation: slideIn 0.5s ease forwards, slideOut 0.5s ease forwards 4s;
+  }
+
+  /* Animation for sliding in */
+  @keyframes slideIn {
+    from { transform: translateX(-50%) translateY(100%); opacity: 0; }
+    to { transform: translateX(-50%) translateY(0); opacity: 1; }
+  }
+
+  /* Animation for sliding out */
+  @keyframes slideOut {
+    from { transform: translateX(-50%) translateY(0); opacity: 1; }
+    to { transform: translateX(-50%) translateY(100%); opacity: 0; }
+  }
+
+  /* Style for the line at the bottom */
+  .popup-line {
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    width: 100%;
+    transform: translateX(-50%);
+    height: 2px;
+    background-color: white;
+    animation: lineAnimation 5s linear forwards;
+  }
+
+  /* Animation for the line */
+  @keyframes lineAnimation {
+    0% { width: 0; }
+    100% { width: 100%; }
+  }
+</style>
+
+
+</body>
+</meta>
+
+</html>

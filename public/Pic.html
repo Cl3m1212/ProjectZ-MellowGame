@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <style>
+    canvas {
+      border: 1px solid #ffffff;
+      cursor: crosshair;
+    }
+    
+  </style>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body style="background-color: #171717;">
+  <canvas id="canvas" width="800" height="600"></canvas>
+  <div>
+    <input type="color" id="colorPicker">
+    <button onclick="clearCanvas()">Clear</button>
+    <button onclick="saveImage()">Save Image</button>
+  </div>
+  <div class="container">
+
+    <button id="generateButton">Generate Topic</button>
+    <div id="topicDisplay"></div>
+  </div>
+
+  <script>
+    const topics = [
+      "Art",
+      "History",
+      "Science",
+      "Technology",
+      "Dog",
+      "Pig",
+      "Cat",
+      "Tree",
+      "Pizza",
+      "Clock",
+      "Video game",
+      "House",
+      "Music",
+      "Literature",
+      "Nature",
+      "Space",
+      "Food",
+      "Sports"
+    ];
+
+    function generateRandomTopic() {
+      const randomIndex = Math.floor(Math.random() * topics.length);
+      return topics[randomIndex];
+    }
+
+    document.getElementById("generateButton").addEventListener("click", function() {
+      const topic = generateRandomTopic();
+      document.getElementById("topicDisplay").textContent = "Your random topic is: " + topic;
+    });
+  
+    const canvas = document.getElementById('canvas');
+    const ctx = canvas.getContext('2d');
+    const colorPicker = document.getElementById('colorPicker');
+
+    let isDrawing = false;
+    let lastX = 0;
+    let lastY = 0;
+
+    canvas.addEventListener('mousedown', (e) => {
+      isDrawing = true;
+      [lastX, lastY] = [e.offsetX, e.offsetY];
+    });
+
+    canvas.addEventListener('mousemove', (e) => {
+      if (!isDrawing) return;
+      ctx.strokeStyle = colorPicker.value;
+      ctx.lineCap = 'round';
+      ctx.lineWidth = 5;
+
+      ctx.beginPath();
+      ctx.moveTo(lastX, lastY);
+      ctx.lineTo(e.offsetX, e.offsetY);
+      ctx.stroke();
+      [lastX, lastY] = [e.offsetX, e.offsetY];
+    });
+
+    canvas.addEventListener('mouseup', () => {
+      isDrawing = false;
+    });
+
+    function clearCanvas() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+    }
+
+    function saveImage() {
+      const dataUrl = canvas.toDataURL();
+      const link = document.createElement('a');
+      link.href = dataUrl;
+      link.download = 'drawing.png';
+      link.click();
+
+      // Display the URL for sharing
+      const imageLink = document.getElementById('imageLink');
+      imageLink.textContent = 'Shareable link: ' + window.location.href.split('?')[0] + '?' + encodeURIComponent(dataUrl);
+      imageLink.style.display = 'block';
+    }
+  </script>
+  
+<div id="popup" class="popup-container">
+  <!-- Content for the pop-up -->
+  <span id="popup-message"><center>Click the color box to choose a color and draw to get started</center>Save img & Send to your friend (generate a Topic if need ideas)</span>
+  <!-- Line animation -->
+  <div class="popup-line"></div>
+</div>
+
+
+<style>
+  #topicDisplay{
+    color:#ffffff;
+  }
+   .hover-pointer {
+      cursor: pointer;
+  }
+  /* Style for the pop-up container */
+  .popup-container {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #333;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    z-index: 1000;
+    animation: slideIn 0.5s ease forwards, slideOut 0.5s ease forwards 4s;
+  }
+
+  /* Animation for sliding in */
+  @keyframes slideIn {
+    from { transform: translateX(-50%) translateY(100%); opacity: 0; }
+    to { transform: translateX(-50%) translateY(0); opacity: 1; }
+  }
+
+  /* Animation for sliding out */
+  @keyframes slideOut {
+    from { transform: translateX(-50%) translateY(0); opacity: 1; }
+    to { transform: translateX(-50%) translateY(100%); opacity: 0; }
+  }
+
+  /* Style for the line at the bottom */
+  .popup-line {
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    width: 100%;
+    transform: translateX(-50%);
+    height: 2px;
+    background-color: white;
+    animation: lineAnimation 5s linear forwards;
+  }
+
+  /* Animation for the line */
+  @keyframes lineAnimation {
+    0% { width: 0; }
+    100% { width: 100%; }
+  }
+</style>
+</body>
+</html>

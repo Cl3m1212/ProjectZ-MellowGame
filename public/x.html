@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tic Tac Toe</title>
+<link rel="stylesheet" href="style.css">
+
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+  }
+  h1 {
+    margin-bottom: 20px;
+  }
+  .board {
+    display: grid;
+    grid-template-columns: repeat(3, 100px);
+    grid-template-rows: repeat(3, 100px);
+    gap: 6px;
+    margin: 20px auto; /* Center the board horizontally */
+    width: 320px; /* Set a fixed width to keep the board centered */
+}
+
+  .cell {
+    width: 100px;
+    height: 100px;
+    border: 2px solid #333;
+    font-size: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  .cell:hover {
+    background-color: #f0f0f0;
+  }
+</style>
+</head>
+<body>
+
+<h1>Tic Tac Toe</h1>
+<div class="board" id="board">
+  <div class="cell" onclick="makeMove(0,0)"></div>
+  <div class="cell" onclick="makeMove(0,1)"></div>
+  <div class="cell" onclick="makeMove(0,2)"></div>
+  <div class="cell" onclick="makeMove(1,0)"></div>
+  <div class="cell" onclick="makeMove(1,1)"></div>
+  <div class="cell" onclick="makeMove(1,2)"></div>
+  <div class="cell" onclick="makeMove(2,0)"></div>
+  <div class="cell" onclick="makeMove(2,1)"></div>
+  <div class="cell" onclick="makeMove(2,2)"></div>
+</div>
+
+<p id="message"></p>
+
+<script>
+  const board = document.getElementById('board');
+  const cells = document.querySelectorAll('.cell');
+  const message = document.getElementById('message');
+
+  let currentPlayer = 'X';
+  let gameBoard = [
+    ['', '', ''],
+    ['', '', ''],
+    ['', '', '']
+  ];
+
+  function makeMove(row, col) {
+    if (gameBoard[row][col] === '') {
+      gameBoard[row][col] = currentPlayer;
+      cells[row * 3 + col].innerText = currentPlayer;
+      if (checkWinner()) {
+        message.innerText = `${currentPlayer} wins!`;
+        disableBoard();
+      } else if (checkDraw()) {
+        message.innerText = 'It\'s a draw!';
+      } else {
+        currentPlayer = currentPlayer === 'X' ? 'O' : 'X';
+        message.innerText = `${currentPlayer}'s turn`;
+      }
+    }
+  }
+
+  function checkWinner() {
+    // Check rows
+    for (let i = 0; i < 3; i++) {
+      if (gameBoard[i][0] === currentPlayer && gameBoard[i][1] === currentPlayer && gameBoard[i][2] === currentPlayer) {
+        return true;
+      }
+    }
+    // Check columns
+    for (let j = 0; j < 3; j++) {
+      if (gameBoard[0][j] === currentPlayer && gameBoard[1][j] === currentPlayer && gameBoard[2][j] === currentPlayer) {
+        return true;
+      }
+    }
+    // Check diagonals
+    if (
+      (gameBoard[0][0] === currentPlayer && gameBoard[1][1] === currentPlayer && gameBoard[2][2] === currentPlayer) ||
+      (gameBoard[0][2] === currentPlayer && gameBoard[1][1] === currentPlayer && gameBoard[2][0] === currentPlayer)
+    ) {
+      return true;
+    }
+    return false;
+  }
+
+  function checkDraw() {
+    for (let row = 0; row < 3; row++) {
+      for (let col = 0; col < 3; col++) {
+        if (gameBoard[row][col] === '') {
+          return false;
+        }
+      }
+    }
+    return true;
+  }
+
+  function disableBoard() {
+    for (let cell of cells) {
+      cell.onclick = null;
+    }
+  }
+</script>
+
+</body>
+</html>

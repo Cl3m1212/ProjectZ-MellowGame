@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mellow</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="icon" type="image/png" type="image/x-icon" href="logoimg.png">
+
+</head>
+<body>
+  <style>
+    p{
+        font-size:40px;
+    }
+  </style>
+    
+<div id="popup" class="popup-container">
+    <!-- Content for the pop-up -->
+    <span id="popup-message"><center> Welcome to 20 Questions</center>Generate Topic to start and text in chat to play! </span>
+    <!-- Line animation -->
+    <div class="popup-line"></div>
+  </div>
+    <center> <h1>Welcome to 20 Questions</h1>
+    <button onclick="generateTopic()">Generate Topic</button>
+    <div id="topic"></div>
+    <ul id="dubText" style="display: none;">
+        <li>Generate text so it can come up with an idea or object</li>
+        <br>
+        <li>One player generates the oject, </li>
+        <br>
+        <li>and the other player has up to 20 questions to guess what it is. </li>
+        <br>
+        <li>The questions must be answerable with "yes" or "no". For example:Player 1: Is it alive?Player 2: No.Player 1: Is it something you can eat? Player 2: Yes. And so on... </li>
+    </ul>
+</center>
+  <script>
+    function generateTopic() {
+        const topics = [
+    "Cat Fish",
+    "New York",
+    "Movies",
+    "Books",
+    "Martin Luther King jr",
+    "Foods",
+    "Countries",
+    "Soccer",
+    "Drums",
+    "Spiderman",
+    "Batman",
+    "Plants",
+    "Vehicles",
+    "Kanye West",
+    "Star wars",
+    "Bird",
+    "light bulb",
+    "Art",
+    "Painting",
+    "Languages"
+];
+
+
+    const randomTopic = topics[Math.floor(Math.random() * topics.length)];
+    const dubText = document.getElementById('dubText').innerHTML;
+    document.getElementById('topic').innerHTML = `<h2>Your Topic:</h2><p>${randomTopic}</p><h3> Rules for Game:</h3>${dubText}`;
+}
+
+    document.addEventListener("DOMContentLoaded", function() {
+      const links = document.querySelectorAll("#sidebar a");
+
+      links.forEach(link => {
+        link.addEventListener("click", function(event) {
+          event.preventDefault(); // Prevent the default behavior of the link
+          
+          // Copy the text content of the link to the clipboard
+          const linkText = link.textContent.trim();
+          navigator.clipboard.writeText(linkText)
+            .then(() => {
+              console.log(`Copied: ${linkText}`);
+              showPopup(`Type the copied text "${linkText}" and send it to the chat to play!`);
+            })
+            .catch(err => {
+              console.error('Failed to copy: ', err);
+            });
+        });
+      });
+    });
+  </script>
+  
+    <script src="/socket.io/socket.io.js"></script>
+  
+    <!-- HTML -->
+  <style>
+     .hover-pointer {
+        cursor: pointer;
+    }
+    /* Style for the pop-up container */
+    .popup-container {
+      position: fixed;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      background-color: #333;
+      color: white;
+      padding: 10px 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+      z-index: 1000;
+      animation: slideIn 0.5s ease forwards, slideOut 0.5s ease forwards 4s;
+    }
+  
+    /* Animation for sliding in */
+    @keyframes slideIn {
+      from { transform: translateX(-50%) translateY(100%); opacity: 0; }
+      to { transform: translateX(-50%) translateY(0); opacity: 1; }
+    }
+  
+    /* Animation for sliding out */
+    @keyframes slideOut {
+      from { transform: translateX(-50%) translateY(0); opacity: 1; }
+      to { transform: translateX(-50%) translateY(100%); opacity: 0; }
+    }
+  
+    /* Style for the line at the bottom */
+    .popup-line {
+      position: absolute;
+      bottom: -10px;
+      left: 50%;
+      width: 100%;
+      transform: translateX(-50%);
+      height: 2px;
+      background-color: white;
+      animation: lineAnimation 5s linear forwards;
+    }
+  
+    /* Animation for the line */
+    @keyframes lineAnimation {
+      0% { width: 0; }
+      100% { width: 100%; }
+    }
+  </style>
+  
+  
+    
+  
+  <script src="script.js"></script>
+</body>
+</html>
