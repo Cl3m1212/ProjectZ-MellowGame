@@ -59,21 +59,22 @@
         <input id="input"  type="txt" placeholder="Game and text...">
         
         <button id="sent">Send</button>
+       
     <!--    
         <p id="closeButton"  class="hover-pointer">X</p>
   Your Pong game content here --> 
-  <script>
-   // document.getElementById('closeButton').addEventListener('click', () => {
-      // Communicate with the parent document to close or hide the iframe
-    //  window.parent.closeIframe();
-    //});
-
-    
-  </script>
+ 
       </form>
       
     </div>
   </div>
+  <script>
+    function hideIframe() {
+        var iframe = document.getElementById("myIframe");
+        iframe.style.display = "none";
+    }
+    </script>
+    
   <!-- Include Driver.js library -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/driver.js/0.9.6/driver.min.js"></script>
   <script>
@@ -114,7 +115,7 @@
                 element: '#username-form',
                 popover: {
                     title: 'Username',
-                    description: 'Complete the Steps first then press Next! Enter your username here then submit. Reaload Page for problems...',
+                    description: 'Complete the Steps first then press Next! Enter/Type your username here then submit and press the next button. Reaload Page for problems...',
                     position: 'bottom-center',
                 }
             },
