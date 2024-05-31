@@ -31,7 +31,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const message = input.value.trim();
       if (message && username && room) {
         
-        const fullMessage = ` - ${username}: ${message}`;
+        const fullMessage = ` ${username}: ${message}`;
         socket.emit('chat message', { message: fullMessage, room });
         input.value = '';
       }
@@ -50,6 +50,7 @@ socket.on('chat message', (msg) => {
     iframe.width = '100%';
     iframe.height = '400px'; // Adjust height as needed
     document.getElementById('messages').appendChild(iframe);
+    createCloseButton(iframe);
   }
   if (msg.toLowerCase().includes('worm')) {
     const iframe = document.createElement('iframe');
@@ -57,6 +58,7 @@ socket.on('chat message', (msg) => {
     iframe.width = '100%';
     iframe.height = '400px'; // Adjust height as needed
     document.getElementById('messages').appendChild(iframe);
+    createCloseButton(iframe);
   }
   if (msg.toLowerCase().includes('password')) {
     const iframe = document.createElement('iframe');
@@ -64,6 +66,7 @@ socket.on('chat message', (msg) => {
     iframe.width = '100%';
     iframe.height = '400px'; // Adjust height as needed
     document.getElementById('messages').appendChild(iframe);
+    createCloseButton(iframe);
   }
   if (msg.toLowerCase().includes('pictionary')) {
     const iframe = document.createElement('iframe');
@@ -71,6 +74,7 @@ socket.on('chat message', (msg) => {
     iframe.width = '100%';
     iframe.height = '400px'; // Adjust height as needed
     document.getElementById('messages').appendChild(iframe);
+    createCloseButton(iframe);
   }
   if (msg.toLowerCase().includes('clicker')) {
     const iframe = document.createElement('iframe');
@@ -78,6 +82,7 @@ socket.on('chat message', (msg) => {
     iframe.width = '100%';
     iframe.height = '400px'; // Adjust height as needed
     document.getElementById('messages').appendChild(iframe);
+    createCloseButton(iframe);
   }
   if (msg.toLowerCase().includes('simon')) {
     const iframe = document.createElement('iframe');
@@ -85,6 +90,7 @@ socket.on('chat message', (msg) => {
     iframe.width = '100%';
     iframe.height = '400px'; // Adjust height as needed
     document.getElementById('messages').appendChild(iframe);
+    createCloseButton(iframe);
   }
   if (msg.toLowerCase().includes('matching')) {
     const iframe = document.createElement('iframe');
@@ -92,6 +98,7 @@ socket.on('chat message', (msg) => {
     iframe.width = '100%';
     iframe.height = '400px'; // Adjust height as needed
     document.getElementById('messages').appendChild(iframe);
+    createCloseButton(iframe);
   }
   if (msg.toLowerCase().includes('breakout')) {
     const iframe = document.createElement('iframe');
@@ -99,6 +106,7 @@ socket.on('chat message', (msg) => {
     iframe.width = '100%';
     iframe.height = '400px'; // Adjust height as needed
     document.getElementById('messages').appendChild(iframe);
+    createCloseButton(iframe);
   }
   if (msg.toLowerCase().includes('questions')) {
     const iframe = document.createElement('iframe');
@@ -106,6 +114,7 @@ socket.on('chat message', (msg) => {
     iframe.width = '100%';
     iframe.height = '400px'; // Adjust height as needed
     document.getElementById('messages').appendChild(iframe);
+    createCloseButton(iframe);
   }
   if (msg.toLowerCase().includes('connect4')) {
     const iframe = document.createElement('iframe');
@@ -113,6 +122,7 @@ socket.on('chat message', (msg) => {
     iframe.width = '100%';
     iframe.height = '400px'; // Adjust height as needed
     document.getElementById('messages').appendChild(iframe);
+    createCloseButton(iframe);
   }
   if (msg.toLowerCase().includes('x')) {
     const iframe = document.createElement('iframe');
@@ -120,9 +130,19 @@ socket.on('chat message', (msg) => {
     iframe.width = '100%';
     iframe.height = '400px'; // Adjust height as needed
     document.getElementById('messages').appendChild(iframe);
+    createCloseButton(iframe);
   }
   });
-  
+  function createCloseButton(iframe) {
+    const closeButton = document.createElement('button');
+    closeButton.textContent = 'Close Game';
+    closeButton.onclick = function() {
+      iframe.parentNode.removeChild(iframe);
+      closeButton.parentNode.removeChild(closeButton);
+    };
+    iframe.parentNode.insertBefore(closeButton, iframe);
+  }
+
     // Other code...
   });
 
