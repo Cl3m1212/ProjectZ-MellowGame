@@ -70,7 +70,7 @@ socket.on('chat message', (msg) => {
   }
   if (msg.toLowerCase().includes('pictionary')) {
     const iframe = document.createElement('iframe');
-    iframe.src = '/pic.html'; // URL of your Pong game
+    iframe.src = '/Pic.html'; // URL of your Pong game
     iframe.width = '100%';
     iframe.height = '400px'; // Adjust height as needed
     document.getElementById('messages').appendChild(iframe);
@@ -86,7 +86,7 @@ socket.on('chat message', (msg) => {
   }
   if (msg.toLowerCase().includes('simon')) {
     const iframe = document.createElement('iframe');
-    iframe.src = '/simon.html'; // URL of your Pong game
+    iframe.src = '/Simon.html'; // URL of your Pong game
     iframe.width = '100%';
     iframe.height = '400px'; // Adjust height as needed
     document.getElementById('messages').appendChild(iframe);
