@@ -68,6 +68,7 @@ document.onkeydown = function(e) {
      return false;
   }
 }
+
 </script>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
@@ -150,7 +151,26 @@ form.example::after {
   clear: both;
   display: table;
 }
-      
+#arrow-buttons {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            justify-content: space-between;
+            width: 120px;
+        }
+        .arrow-button {
+            width: 30px;
+            height: 30px;
+            background-color: #ccc;
+            border: 1px solid #aaa;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+        } 
  .boxlul{ padding:25px; border:10px solid white margin: auto; margin-top:100;
    margin-left: auto;
   margin-right: auto; width: 100%; border:10px lightgreen;
@@ -725,6 +745,56 @@ Snake Tile Entity
   };
 
 })();
+// Define variables to track touch coordinates
+var startX, startY, endX, endY;
+
+// Add touch event listeners to the game stage element
+var stageElem = document.querySelector('.stage');
+stageElem.addEventListener('touchstart', handleTouchStart, false);
+stageElem.addEventListener('touchmove', handleTouchMove, false);
+stageElem.addEventListener('touchend', handleTouchEnd, false);
+
+// Handle touch start event
+function handleTouchStart(event) {
+    var touch = event.touches[0];
+    startX = touch.clientX;
+    startY = touch.clientY;
+}
+
+// Handle touch move event
+function handleTouchMove(event) {
+    event.preventDefault(); // Prevent scrolling
+}
+
+// Handle touch end event
+function handleTouchEnd(event) {
+    var touch = event.changedTouches[0];
+    endX = touch.clientX;
+    endY = touch.clientY;
+    var deltaX = endX - startX;
+    var deltaY = endY - startY;
+    
+    // Determine the direction of the swipe gesture
+    if (Math.abs(deltaX) > Math.abs(deltaY)) {
+        // Horizontal swipe
+        if (deltaX > 0) {
+            // Right swipe
+            g.states[g.state].rightOn();
+        } else {
+            // Left swipe
+            g.states[g.state].leftOn();
+        }
+    } else {
+        // Vertical swipe
+        if (deltaY > 0) {
+            // Down swipe
+            g.states[g.state].downOn();
+        } else {
+            // Up swipe
+            g.states[g.state].upOn();
+        }
+    }
+}
 
 /*================================================
 
@@ -1082,6 +1152,7 @@ Play State
     this.scoreElem.innerHTML = this.score;
     this.time = new g.Time();
     this.getDimensions();
+    
     if( this.winWidth < this.winHeight ) {
       this.rows = this.dimLong;
       this.cols = this.dimShort;
@@ -1202,7 +1273,9 @@ Play State
 
   g.addState( new StatePlay() );
 
-})();
+}
+
+) ();
 
 /*================================================
 
@@ -1350,7 +1423,8 @@ function getTimeCodeFromNum(num) {
     <!-- Line animation -->
     <div class="popup-line"></div>
   </div>
-  
+
+    </div>
   
   <style>
      .hover-pointer {
