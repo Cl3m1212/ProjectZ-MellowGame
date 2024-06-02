@@ -40,7 +40,21 @@
 </style>
 </head>
 <body>
-
+  <center>
+    <div id="fullScreenBtn" onclick="toggleFullScreen()">
+        <p style="color:floralwhite">  &#x26F6; Full Screen</p>
+    </div>
+    <script>
+      function toggleFullScreen() {
+      if (!document.fullscreenElement) {
+        document.documentElement.requestFullscreen();
+      } else {
+        if (document.exitFullscreen) {
+          document.exitFullscreen();
+        }
+      }
+    }</script>
+  </center>
 <h1>Tic Tac Toe</h1>
 <div class="board" id="board">
   <div class="cell" onclick="makeMove(0,0)"></div>

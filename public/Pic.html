@@ -14,6 +14,21 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body style="background-color: #171717;">
+  <center>
+    <div id="fullScreenBtn" onclick="toggleFullScreen()">
+      &#x26F6; Full Screen
+    </div>
+    <script>
+      function toggleFullScreen() {
+      if (!document.fullscreenElement) {
+        document.documentElement.requestFullscreen();
+      } else {
+        if (document.exitFullscreen) {
+          document.exitFullscreen();
+        }
+      }
+    }</script>
+  </center>
   <canvas id="canvas" width="800" height="600"></canvas>
   <div>
     <input type="color" id="colorPicker">

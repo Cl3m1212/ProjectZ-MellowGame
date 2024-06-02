@@ -28,6 +28,21 @@
       
 
   <body>
+    <center>
+      <div id="fullScreenBtn" onclick="toggleFullScreen()">
+        &#x26F6; Full Screen
+      </div>
+      <script>
+        function toggleFullScreen() {
+        if (!document.fullscreenElement) {
+          document.documentElement.requestFullscreen();
+        } else {
+          if (document.exitFullscreen) {
+            document.exitFullscreen();
+          }
+        }
+      }</script>
+    </center>
     <div class="wrapper">
       <ul class="cards">
         <li class="card">

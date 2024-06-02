@@ -70,7 +70,7 @@ socket.on('chat message', (msg) => {
   }
   if (msg.toLowerCase().includes('pictionary')) {
     const iframe = document.createElement('iframe');
-    iframe.src = '/Pic.html'; // URL of your Pong game
+    iframe.src = '/pic.html'; // URL of your Pong game
     iframe.width = '100%';
     iframe.height = '400px'; // Adjust height as needed
     document.getElementById('messages').appendChild(iframe);
@@ -86,7 +86,7 @@ socket.on('chat message', (msg) => {
   }
   if (msg.toLowerCase().includes('simon')) {
     const iframe = document.createElement('iframe');
-    iframe.src = '/Simon.html'; // URL of your Pong game
+    iframe.src = '/simon.html'; // URL of your Pong game
     iframe.width = '100%';
     iframe.height = '400px'; // Adjust height as needed
     document.getElementById('messages').appendChild(iframe);
@@ -146,18 +146,18 @@ socket.on('chat message', (msg) => {
     // Other code...
   });
 
+  
 function openNav() {
-  document.getElementById("sidebar").style.width = "250px";
-  document.getElementById("main").style.marginLeft = "250px";
-  document.getElementById("input").style.width = "calc(100% - 300px)"; // Adjust as needed
+  document.getElementById("sidebar").style.width = "500px";
+  if (window.innerWidth <= 500) {
+    document.getElementById("main").style.marginLeft = "500px";
+  }
 }
 
 function closeNav() {
   document.getElementById("sidebar").style.width = "0";
-  document.getElementById("main").style.marginLeft= "0";
-  document.getElementById("input").style.width = "100%";
+  document.getElementById("main").style.marginLeft = "0";
 }
-
   // Function to show the pop-up notification
   function showPopup(message) {
     // Display the pop-up container

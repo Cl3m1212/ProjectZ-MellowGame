@@ -25,6 +25,21 @@
 <link href="https://fonts.googleapis.com/css?family=Oswald" rel="stylesheet">
 <div id="container" style="overflow: hidden; position: fixed; height: 100vh; width: 100vw;">
 <div id="replace">
+    <center>
+        <div id="fullScreenBtn" onclick="toggleFullScreen()">
+            <p style="color:floralwhite">  &#x26F6; Full Screen</p>
+        </div>
+        <script>
+          function toggleFullScreen() {
+          if (!document.fullscreenElement) {
+            document.documentElement.requestFullscreen();
+          } else {
+            if (document.exitFullscreen) {
+              document.exitFullscreen();
+            }
+          }
+        }</script>
+      </center>
     <div class="title">PING-PONG MULTIPLAYER</div>
     <div class="button" id="start" onclick="info()">START</div><br>
 </head>

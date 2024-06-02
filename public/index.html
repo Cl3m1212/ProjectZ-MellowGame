@@ -16,7 +16,7 @@
     <!-- Line animation -->
     <div class="popup-line"></div>
   </div>
-    <div id="sidebar">
+    <div id="sidebar" class="draggable">
       <a href="javascript:void(0)" class="close-btn" onclick="closeNav()">&times;</a>
       <h1 style=" padding: 10px 15px;">Type the words in the game room to play!</h1>
 
@@ -153,6 +153,39 @@
         localStorage.setItem('tutorialCompleted', true);
     }
 });
+
+var isDragging = false;
+
+
+function toggleNav() {
+  var sidebar = document.getElementById("sidebar");
+  if (sidebar.style.width === "500px") {
+    closeNav();
+  } else {
+    openNav();
+  }
+}
+
+
+document.getElementById("sidebar").addEventListener("mousedown", function(event) {
+  isDragging = true;
+  document.addEventListener("mousemove", onMouseMove);
+  document.addEventListener("mouseup", onMouseUp);
+});
+
+function onMouseMove(event) {
+  if (isDragging) {
+    var sidebar = document.getElementById("sidebar");
+    sidebar.style.width = event.clientX + "px";
+    document.getElementById("main").style.marginLeft = event.clientX + "px";
+  }
+}
+
+function onMouseUp() {
+  isDragging = false;
+  document.removeEventListener("mousemove", onMouseMove);
+  document.removeEventListener("mouseup", onMouseUp);
+}
   </script>
   
     <script src="/socket.io/socket.io.js"></script>
@@ -205,6 +238,14 @@
     @keyframes lineAnimation {
       0% { width: 0; }
       100% { width: 100%; }
+    }
+    @media screen and (max-width: 500px) {
+      body {
+        overflow-x: hidden;
+      }
+    }
+    html, body {
+      overflow-x: hidden;
     }
   </style>
   

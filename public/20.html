@@ -21,7 +21,21 @@
     <!-- Line animation -->
     <div class="popup-line"></div>
   </div>
-    <center> <h1>Welcome to 20 Questions</h1>
+    <center> 
+      <div id="fullScreenBtn" onclick="toggleFullScreen()">
+        &#x26F6; Full Screen
+      </div>
+      <script>
+        function toggleFullScreen() {
+        if (!document.fullscreenElement) {
+          document.documentElement.requestFullscreen();
+        } else {
+          if (document.exitFullscreen) {
+            document.exitFullscreen();
+          }
+        }
+      }</script>
+      <h1>Welcome to 20 Questions</h1>
     <button onclick="generateTopic()">Generate Topic</button>
     <div id="topic"></div>
     <ul id="dubText" style="display: none;">

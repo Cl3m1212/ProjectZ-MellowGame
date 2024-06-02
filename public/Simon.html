@@ -121,7 +121,21 @@ function closeSearch() {
 }
 </script>
 </header>
-   
+
+        <div id="fullScreenBtn" onclick="toggleFullScreen()">
+            <p style="color:floralwhite">  &#x26F6; Full Screen</p>
+        </div>
+        <script>
+          function toggleFullScreen() {
+          if (!document.fullscreenElement) {
+            document.documentElement.requestFullscreen();
+          } else {
+            if (document.exitFullscreen) {
+              document.exitFullscreen();
+            }
+          }
+        }</script>
+     
 <div class="main">
 		<div class="container">
 			
