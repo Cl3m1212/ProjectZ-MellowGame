@@ -97,9 +97,9 @@ body {
   #sidebar .close-btn {
     position: absolute;
     top: 0;
-    right: 25px;
+    left: 25px;
     font-size: 36px;
-    margin-left: 50px;
+    margin-right: 40px;
   }
   #main {
     transition: margin-left .5s;
@@ -121,10 +121,12 @@ font-weight: bold;
 #main {
   transition: margin-left 0.5s;
 }
+@media screen and (min-width: 501px) {
+  #sidebar {
+    width: 250px;
+  }
 
-/* Close button style */
-.close-btn {
-  position: absolute;
-  top: 10px;
-  right: 10px;
+  #main {
+    margin-left: 250px;
+  }
 }

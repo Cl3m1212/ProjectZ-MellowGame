@@ -17,8 +17,8 @@
     <div class="popup-line"></div>
   </div>
     <div id="sidebar" class="draggable">
-      <a href="javascript:void(0)" class="close-btn" onclick="closeNav()">&times;</a>
-      <h1 style=" padding: 10px 15px;">Type the words in the game room to play!</h1>
+      
+      <h1 style=" padding: 10px 15px;">Type the words in the game room to play! <a href="javascript:void(0)" class="close-btn" onclick="closeNav()">&times;</a></h1>
 
       <p style=" font-size: 25px; padding: 10px 15px;">Two Player player</p>
       <a href="#" id="pong-link">Pong</a>
@@ -155,7 +155,6 @@
 });
 
 var isDragging = false;
-
 
 function toggleNav() {
   var sidebar = document.getElementById("sidebar");

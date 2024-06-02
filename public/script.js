@@ -146,18 +146,31 @@ socket.on('chat message', (msg) => {
     // Other code...
   });
 
-  
-function openNav() {
-  document.getElementById("sidebar").style.width = "500px";
-  if (window.innerWidth <= 500) {
-    document.getElementById("main").style.marginLeft = "500px";
+ 
+  function openNav() {
+    if (window.innerWidth <= 500) {
+      document.getElementById("sidebar").style.width = "500px";
+      document.getElementById("main").style.marginLeft = "500px";
+    } else {
+      document.getElementById("sidebar").style.width = "250px";
+      document.getElementById("main").style.marginLeft = "250px";
+    }
   }
-}
-
-function closeNav() {
-  document.getElementById("sidebar").style.width = "0";
-  document.getElementById("main").style.marginLeft = "0";
-}
+  
+  function closeNav() {
+    document.getElementById("sidebar").style.width = "0";
+    document.getElementById("main").style.marginLeft = "0";
+  }
+  
+  function toggleFullScreen() {
+    if (!document.fullscreenElement) {
+      document.documentElement.requestFullscreen();
+    } else {
+      if (document.exitFullscreen) {
+        document.exitFullscreen();
+      }
+    }
+  }
   // Function to show the pop-up notification
   function showPopup(message) {
     // Display the pop-up container
