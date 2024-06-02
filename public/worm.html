@@ -39,7 +39,9 @@
       document.exitFullscreen();
     }
   }
-}</script>
+}
+document.getElementById('fullScreenBtn').addEventListener('click', toggleFullScreen);
+</script>
 <script> 
 document.onkeydown = function(e) {
   if(event.keyCode == 123) {

@@ -34,7 +34,9 @@
             document.exitFullscreen();
           }
         }
-      }</script>
+      }
+      document.getElementById('fullScreenBtn').addEventListener('click', toggleFullScreen);
+      </script>
       <h1>Welcome to 20 Questions</h1>
     <button onclick="generateTopic()">Generate Topic</button>
     <div id="topic"></div>
