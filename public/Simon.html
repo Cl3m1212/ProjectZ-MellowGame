@@ -122,22 +122,30 @@ function closeSearch() {
 </script>
 </header>
 
-        <div id="fullScreenBtn" onclick="toggleFullScreen()">
-            <p style="color:floralwhite">  &#x26F6; Full Screen</p>
-        </div>
-        <script>
-          function toggleFullScreen() {
-          if (!document.fullscreenElement) {
-            document.documentElement.requestFullscreen();
-          } else {
-            if (document.exitFullscreen) {
-              document.exitFullscreen();
-            }
-          }
+
+      <div id="fullScreenBtn" onclick="toggleFullScreen()">
+        &#x26F6; Full Screen
+      </div>
+      <script>
+         // Function to toggle full screen mode
+  function toggleFullScreen() {
+    // Check if the screen size is smaller than 500px (mobile)
+    if (window.innerWidth <= 500) {
+      // Open a new page in full-screen mode
+      window.open("Simon.html", "_blank", "fullscreen=yes");
+    } else {
+      // Toggle full screen mode for the current document
+      if (!document.fullscreenElement) {
+        document.documentElement.requestFullscreen();
+      } else {
+        if (document.exitFullscreen) {
+          document.exitFullscreen();
         }
-        document.getElementById('fullScreenBtn').addEventListener('click', toggleFullScreen);
-        </script>
-     
+      }
+    }
+  }
+      document.getElementById('fullScreenBtn').addEventListener('click', toggleFullScreen);
+      </script>
 <div class="main">
 		<div class="container">
 			

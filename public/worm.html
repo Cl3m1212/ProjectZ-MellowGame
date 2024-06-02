@@ -26,22 +26,30 @@
 }</script>
 </head>
 <body oncontextmenu="return false" >
-  <center>
-    <div id="fullScreenBtn" onclick="toggleFullScreen()">
-  &#x26F6; Full Screen
-</div>
-<script>
+  <center> 
+      <div id="fullScreenBtn" onclick="toggleFullScreen()">
+        &#x26F6; Full Screen
+      </div>
+      <script>
+         // Function to toggle full screen mode
   function toggleFullScreen() {
-  if (!document.fullscreenElement) {
-    document.documentElement.requestFullscreen();
-  } else {
-    if (document.exitFullscreen) {
-      document.exitFullscreen();
+    // Check if the screen size is smaller than 500px (mobile)
+    if (window.innerWidth <= 500) {
+      // Open a new page in full-screen mode
+      window.open("worm.html", "_blank", "fullscreen=yes");
+    } else {
+      // Toggle full screen mode for the current document
+      if (!document.fullscreenElement) {
+        document.documentElement.requestFullscreen();
+      } else {
+        if (document.exitFullscreen) {
+          document.exitFullscreen();
+        }
+      }
     }
   }
-}
-document.getElementById('fullScreenBtn').addEventListener('click', toggleFullScreen);
-</script>
+      document.getElementById('fullScreenBtn').addEventListener('click', toggleFullScreen);
+      </script>
 <script> 
 document.onkeydown = function(e) {
   if(event.keyCode == 123) {

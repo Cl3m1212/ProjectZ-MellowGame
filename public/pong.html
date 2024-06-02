@@ -25,23 +25,30 @@
 <link href="https://fonts.googleapis.com/css?family=Oswald" rel="stylesheet">
 <div id="container" style="overflow: hidden; position: fixed; height: 100vh; width: 100vw;">
 <div id="replace">
-    <center>
+    <center> 
         <div id="fullScreenBtn" onclick="toggleFullScreen()">
-            <p style="color:floralwhite">  &#x26F6; Full Screen</p>
+          &#x26F6; Full Screen
         </div>
         <script>
-          function toggleFullScreen() {
-          if (!document.fullscreenElement) {
-            document.documentElement.requestFullscreen();
-          } else {
-            if (document.exitFullscreen) {
-              document.exitFullscreen();
-            }
+           // Function to toggle full screen mode
+    function toggleFullScreen() {
+      // Check if the screen size is smaller than 500px (mobile)
+      if (window.innerWidth <= 500) {
+        // Open a new page in full-screen mode
+        window.open("pong.html", "_blank", "fullscreen=yes");
+      } else {
+        // Toggle full screen mode for the current document
+        if (!document.fullscreenElement) {
+          document.documentElement.requestFullscreen();
+        } else {
+          if (document.exitFullscreen) {
+            document.exitFullscreen();
           }
         }
+      }
+    }
         document.getElementById('fullScreenBtn').addEventListener('click', toggleFullScreen);
         </script>
-      </center>
     <div class="title">PING-PONG MULTIPLAYER</div>
     <div class="button" id="start" onclick="info()">START</div><br>
 </head>

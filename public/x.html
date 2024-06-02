@@ -40,23 +40,30 @@
 </style>
 </head>
 <body>
-  <center>
+  <center> 
     <div id="fullScreenBtn" onclick="toggleFullScreen()">
-        <p style="color:floralwhite">  &#x26F6; Full Screen</p>
+      &#x26F6; Full Screen
     </div>
     <script>
-      function toggleFullScreen() {
-      if (!document.fullscreenElement) {
-        document.documentElement.requestFullscreen();
-      } else {
-        if (document.exitFullscreen) {
-          document.exitFullscreen();
-        }
+       // Function to toggle full screen mode
+function toggleFullScreen() {
+  // Check if the screen size is smaller than 500px (mobile)
+  if (window.innerWidth <= 500) {
+    // Open a new page in full-screen mode
+    window.open("x.html", "_blank", "fullscreen=yes");
+  } else {
+    // Toggle full screen mode for the current document
+    if (!document.fullscreenElement) {
+      document.documentElement.requestFullscreen();
+    } else {
+      if (document.exitFullscreen) {
+        document.exitFullscreen();
       }
     }
+  }
+}
     document.getElementById('fullScreenBtn').addEventListener('click', toggleFullScreen);
     </script>
-  </center>
 <h1>Tic Tac Toe</h1>
 <div class="board" id="board">
   <div class="cell" onclick="makeMove(0,0)"></div>
