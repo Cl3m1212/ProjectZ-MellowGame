@@ -6,10 +6,10 @@
   <title>Mellow</title>
   <link rel="stylesheet" href="style.css">
   <link rel="icon" type="image/png" type="image/x-icon" href="logoimg.png">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/driver.js/0.9.6/driver.min.css">
+
 </head>
 <body>
- 
+  
 <div id="popup" class="popup-container">
     <!-- Content for the pop-up -->
     <span id="popup-message"><center> Welcome to ProjectZ!</center>Join the chat rooms to text and game!</span>
@@ -18,26 +18,27 @@
   </div>
     <div id="sidebar">
       <a href="javascript:void(0)" class="close-btn" onclick="closeNav()">&times;</a>
-      <h1 style=" padding: 10px 15px;">Type the words in the game room to play!</h1>
-
-      <p style=" font-size: 25px; padding: 10px 15px;">Two Player player</p>
-      <a href="#" id="pong-link">Pong</a>
-      <a href="#" id="pictionary-link">Pictionary</a>
-      <a href="#" id="clicker-link">Clicker</a>
-      <a href="#" id="20-link"> 20 Questions</a>
-      <a href="#" id="20-link">Connect4</a>
-      <p style="  font-size: 25px; padding: 10px 15px;">Single player</p>
-      <a href="#" id="worm-link">Worm</a>    
-      <a href="#" id="simon-link">Simon</a>
-      <a href="#" id="password-link">Password</a>
-      <a href="#" id="clicker-link">Matching</a>
-      <a href="#" id="clicker-link">Breakout</a>
+      <h1>Type the words in the game room to play!</h1>
       <br>
-    <br>
-    <br>
+      <a href="#" id="pong-link">pong</a>
+      <a href="#" id="worm-link">worm</a>    
+      <a href="#" id="simon-link">simon</a>
+      <a href="#" id="pictionary-link">pictionary</a>
+      <a href="#" id="password-link">password</a>
+      <a href="#" id="clicker-link">clicker</a>
+      <br>
+    
+      <a href="#" id="friendphoto-link">friendphoto Guesser</a>
+      <a href="#" id="song-link">Song/lyric Guesser</a>
+      <a href="#" id="8ball-link">8 ball</a>
+      <a href="#" id="4inarow-link">4 in a row</a>
+      <a href="#" id="chess-link">chess</a>
+      <a href="#" id="bball-link">bball/ mini golf</a>
+      <a href="#" id="metronome-link">metronome game</a>
     </div>
+  
     <div id="main">
-      <span style="font-size:30px;cursor:pointer" onclick="openNav()" id="open">&#9776;</span>
+      <span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776;</span>
   
     <div id="username-form">
       <label for="username">Enter your username:</label><br>
@@ -58,25 +59,12 @@
       <form id="form" action="">
         <input id="input"  type="txt" placeholder="Game and text...">
         
-        <button id="sent">Send</button>
+        <button >Send</button>
        
-    <!--    
-        <p id="closeButton"  class="hover-pointer">X</p>
-  Your Pong game content here --> 
- 
       </form>
       
     </div>
   </div>
-  <script>
-    function hideIframe() {
-        var iframe = document.getElementById("myIframe");
-        iframe.style.display = "none";
-    }
-    </script>
-    
-  <!-- Include Driver.js library -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/driver.js/0.9.6/driver.min.js"></script>
   <script>
     
     document.addEventListener("DOMContentLoaded", function() {
@@ -98,70 +86,13 @@
             });
         });
       });
-        // Define the steps for the tutorial
-        if (!localStorage.getItem('tutorialCompleted')) {
-        const driver = new Driver({
-            opacity: 0.8,
-            padding: 3,
-            allowClose: false,
-            stageBackground: 'rgba(163,125,208,0)',
-            nextBtnText: 'Next',
-            prevBtnText: 'Previous',
-            doneBtnText: 'Done',
-        });
-
-        const steps = [
-            {
-                element: '#username-form',
-                popover: {
-                    title: 'Username',
-                    description: 'Complete the Steps first then press Next! Enter/Type your username here then submit and press the next button. Reaload Page for problems...',
-                    position: 'bottom-center',
-                }
-            },
-            {
-                element: '#room-form',
-                popover: {
-                    title: 'Room Code',
-                    description: 'Enter the room code here to join then submit.',
-                    position: 'bottom-center'
-                }
-            },
-            {
-                element: '#open',
-                popover: {
-                    title: 'Nav Bar',
-                    description: 'Open and find Games here',
-                    position: 'right'
-                }
-            },
-            {
-                element: '#sent',
-                popover: {
-                    title: 'Chat',
-                    description: 'Type and send messages to chat and game with friends',
-                    position: 'bottom'
-                }
-            }
-        ];
-
-        // Start the tutorial
-        driver.defineSteps(steps);
-        driver.start();
-
-        // Set a flag in local storage indicating the tutorial has been completed
-        localStorage.setItem('tutorialCompleted', true);
-    }
-});
+    });
   </script>
   
     <script src="/socket.io/socket.io.js"></script>
   
     <!-- HTML -->
   <style>
-     .hover-pointer {
-        cursor: pointer;
-    }
     /* Style for the pop-up container */
     .popup-container {
       position: fixed;
@@ -214,3 +145,55 @@
   <script src="script.js"></script>
 </body>
 </html>
+
+
+
+const express = require('express');
+const http = require('http');
+const socketIO = require('socket.io');
+
+const app = express();
+const server = http.createServer(app);
+const io = socketIO(server);
+
+app.use(express.static(__dirname + '/public'));
+
+const PORT = process.env.PORT || 3000;
+
+// Array to store chat rooms
+const chatRooms = {};
+
+// Function to generate random room codes
+const generateRoomCode = () => {
+  return Math.random().toString(36).substring(2, 8).toUpperCase();
+};
+
+// Socket.IO logic
+io.on('connection', (socket) => {
+  console.log('New user connected');
+
+  // Handle join room event
+  socket.on('joinRoom', (data) => {
+    const { username, roomCode } = data;
+    if (!chatRooms[roomCode]) {
+      chatRooms[roomCode] = [];
+    }
+    chatRooms[roomCode].push(username);
+    socket.join(roomCode);
+    io.to(roomCode).emit('roomUsers', chatRooms[roomCode]);
+  });
+
+  // Handle chat message event
+  socket.on('chat message', ({ message, room }) => {
+    io.to(room).emit('chat message', message);
+  });
+  
+  // Handle disconnect event
+  socket.on('disconnect', () => {
+    console.log('User disconnected');
+  });
+});
+
+server.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
+});
