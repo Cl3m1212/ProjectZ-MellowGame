@@ -143,10 +143,85 @@ socket.on('chat message', (msg) => {
     iframe.parentNode.insertBefore(closeButton, iframe);
   }
 
+  function openGame(gameName) {
+    console.log(`Opening ${gameName} game...`);
+    // Simulate sending a message with the game link
+    const msg = `Let's play ${gameName}!`;
+    const item = document.createElement('li');
+    item.textContent = msg;
+    document.getElementById('messages').appendChild(item);
+
+    // Create the iframe for the game
+    const iframe = document.createElement('iframe');
+    iframe.src = gameName.toLowerCase() + 'pong.html'; // Assuming the game file is named 'pong.html'
+    iframe.width = '100%';
+    iframe.height = '400px'; // Adjust height as needed
+    document.getElementById('messages').appendChild(iframe);
+    createCloseButton(iframe);
+
+    // Scroll to the bottom of the chat
+    window.scrollTo(0, document.body.scrollHeight);
+}
+
+// Rest of your JavaScript code...
+
+  
     // Other code...
   });
 
- 
+  function openGame(gameName) {
+    console.log(`Opening ${gameName} game...`);
+    // Simulate sending a message with the game link
+    const msg = `Let's play ${gameName}!`;
+    const item = document.createElement('li');
+    item.textContent = msg;
+    document.getElementById('messages').appendChild(item);
+
+    // Create the iframe for the game
+    const iframe = document.createElement('iframe');
+    switch(gameName) {
+        case 'pong':
+            iframe.src = 'pong.html';
+            break;
+        case 'pic':
+            iframe.src = 'pic.html';
+            break;
+        case 'click':
+            iframe.src = 'clicker.html';
+            break;
+        case '20':
+            iframe.src = '20.html';
+            break;
+        case 'connect4':
+            iframe.src = 'connect4.html';
+            break;
+        case 'worm':
+            iframe.src = 'worm.html';
+            break;
+        case 'simon':
+            iframe.src = 'simon.html';
+            break;
+        case 'pwd':
+            iframe.src = 'pwd.html';
+            break;
+        case 'matching':
+            iframe.src = 'matching.html';
+            break;
+        // Add more cases for other games as needed
+        default:
+            console.error(`Unsupported game: ${gameName}`);
+            return;
+    }
+    iframe.width = '100%';
+    iframe.height = '400px'; // Adjust height as needed
+    document.getElementById('messages').appendChild(iframe);
+    createCloseButton(iframe);
+
+    // Scroll to the bottom of the chat
+    window.scrollTo(0, document.body.scrollHeight);
+}
+
+
   function openNav() {
     if (window.innerWidth <= 500) {
       document.getElementById("sidebar").style.width = "500px";

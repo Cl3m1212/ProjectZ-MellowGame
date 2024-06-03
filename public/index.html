@@ -21,17 +21,17 @@
       <h1 style=" padding: 10px 15px;">Type the words in the game room to play! <a href="javascript:void(0)" class="close-btn" onclick="closeNav()">&times;</a></h1>
 
       <p style=" font-size: 25px; padding: 10px 15px;">Two Player player</p>
-      <a href="#" id="pong-link">Pong</a>
-      <a href="#" id="pictionary-link">Pictionary</a>
-      <a href="#" id="clicker-link">Clicker</a>
-      <a href="#" id="20-link"> 20 Questions</a>
-      <a href="#" id="20-link">Connect4</a>
+      <a href="#" id="pong-link" onclick="openGame('pong')"><img src="1.png"> Pong</a>
+      <a href="#" id="pictionary-link" onclick="openGame('pic')"><img src="2.png"> Pictionary</a>
+      <a href="#" id="clicker-link" onclick="openGame('click')"><img src="3.png"> Clicker</a>
+      <a href="#" id="20-link" onclick="openGame('20')"><img src="4.png"> 20 Questions</a>
+      <a href="#" id="20-link" onclick="openGame('connect4')"><img src="5.png"> Connect4</a>
       <p style="  font-size: 25px; padding: 10px 15px;">Single player</p>
-      <a href="#" id="worm-link">Worm</a>    
-      <a href="#" id="simon-link">Simon</a>
-      <a href="#" id="password-link">Password</a>
-      <a href="#" id="clicker-link">Matching</a>
-     
+      <a href="#" id="worm-link" onclick="openGame('worm')"><img src="6.png" > Worm</a>    
+      <a href="#" id="simon-link" onclick="openGame('simon')"><img src="7.png"> Simon</a>
+      <a href="#" id="password-link" onclick="openGame('pwd')"><img src="8.png"> Password</a>
+      <a href="#" id="clicker-link" onclick="openGame('matching')"><img src="9.png"> Matching</a>
+ 
       <br>
     <br>
     <br>
@@ -39,7 +39,7 @@
     <div id="main">
       <span style="font-size:30px;cursor:pointer" onclick="openNav()" id="open">&#9776;</span>
   
- <div id="username-form">
+    <div id="username-form">
       <label for="username">Create your username:</label><br>
       <input type="text" id="username"><br>
       <button id="username-submit">Submit</button>
@@ -80,9 +80,11 @@
   <script>
     
     document.addEventListener("DOMContentLoaded", function() {
-      const links = document.querySelectorAll("#sidebar a");
+    const links = document.querySelectorAll("#sidebar a");
 
-      links.forEach(link => {
+    links.forEach(link => {
+      // Exclude specific element
+      if (!link.classList.contains('close-btn')) {
         link.addEventListener("click", function(event) {
           event.preventDefault(); // Prevent the default behavior of the link
           
@@ -97,17 +99,20 @@
               console.error('Failed to copy: ', err);
             });
         });
-      });
+      }
+    });
+  
         // Define the steps for the tutorial
         if (!localStorage.getItem('tutorialCompleted')) {
         const driver = new Driver({
             opacity: 0.8,
             padding: 3,
-            allowClose: false,
+            allowClose: true,
             stageBackground: 'rgba(163,125,208,0)',
             nextBtnText: 'Next',
             prevBtnText: 'Previous',
             doneBtnText: 'Done',
+            
         });
 
         const steps = [
@@ -115,7 +120,7 @@
                 element: '#username-form',
                 popover: {
                     title: 'Username',
-                    description: 'Complete the Steps first then press Next! Enter/Type your username here then submit and press the next button. Reaload Page for problems...',
+                    description: 'Complete the Steps first! Create your username here then submit and press the next button.',
                     position: 'bottom-center',
                 }
             },
@@ -128,7 +133,7 @@
                 }
             },
             {
-                element: '#open',
+                element: '.close-btn',
                 popover: {
                     title: 'Nav Bar',
                     description: 'Open and find Games here',
