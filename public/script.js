@@ -184,7 +184,7 @@ socket.on('chat message', (msg) => {
             iframe.src = 'pong.html';
             break;
         case 'pic':
-            iframe.src = 'pic.html';
+            iframe.src = 'Pic.html';
             break;
         case 'click':
             iframe.src = 'clicker.html';
@@ -199,7 +199,7 @@ socket.on('chat message', (msg) => {
             iframe.src = 'worm.html';
             break;
         case 'simon':
-            iframe.src = 'simon.html';
+            iframe.src = 'Simon.html';
             break;
         case 'pwd':
             iframe.src = 'pwd.html';
