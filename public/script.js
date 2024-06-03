@@ -205,7 +205,7 @@ socket.on('chat message', (msg) => {
             iframe.src = 'pwd.html';
             break;
         case 'matching':
-            iframe.src = 'matching.html';
+            iframe.src = 'match.html';
             break;
         // Add more cases for other games as needed
         default:
