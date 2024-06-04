@@ -241,91 +241,12 @@ cards.forEach(card => {
          --font-color: white;
          --bg-color: #222;;
      }
-       body.light-theme {
-      
-         --font-color: #1877f2;
-         --bg-color: #ddd;
-       }
+     
        .icon {
         height:30px ;
         width:300px ;
        }
-       @media (prefers-color-scheme:light) {
-         body {
-           --font-color: #ddd;
-           --bg-color: #222;;
-         }
-         body.light-theme {
-           --font-color: #1877f2;
-           --bg-color: #ddd;
-         }
-   
-         .light-theme .wrapper {
-     background: #fff;
-    
- }
- .light-theme .nav-bloc svg {
-     width: 25px;
-     fill: #555;
-     transition: 0.2s ease-in-out;
- }
-   
- .light-theme .nav-bloc:hover {
-     background: #fff
- }
-         .light-theme .sub-nav {
-     padding: 0px;
-     width: 200px;
-     height: 100vh;
-     position: absolute;
-     top: 0;
-     left: 0;
-     background: #ddd;
-     z-index: -1;
-     color: white;
-     transform: translateX(-100%);
-     transition: transform 0.2s ease-in-out;
-     border-right: 2px solid #000;
-     border-left: 2px solid #000;
- }
- 
- .light-theme .sub-nav h2 {
-     font-family: open sans, sans-serif;
-     height: 60px;
-     display: flex;
-     justify-content: center;
-     align-items: center;
-     color: #000;
-     background: #ddd;
- }
- .light-theme .sub-nav li a {
-     color: #000;
-     text-decoration: none;
- }
- 
- .light-theme .topnav {
-     overflow: hidden;
-     background-color: white;
- }
- .light-theme a {
-     color: #000;
-     position: relative;
-     padding: 5px 0;
- }
- .light-theme .topnav a {
-    
-    
-     color: #000 text-align: center;
-     padding: 14px 16px;
-     text-decoration: none;
-     font-size: 17px;
- }
- .light-theme p {
-     color: #555;
-     font-size: 20px;
- }
-   
-       }
+      
        
        body {
          color: var(--font-color);

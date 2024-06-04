@@ -4,22 +4,17 @@ document.addEventListener('DOMContentLoaded', () => {
     let username = '';
     let room = '';
   
-    document.getElementById('username-submit').addEventListener('click', () => {
+    document.getElementById('submit-join').addEventListener('click', () => {
       const usernameInput = document.getElementById('username').value.trim();
-      if (usernameInput !== '') {
-        username = usernameInput;
-        document.getElementById('username-form').style.display = 'none';
-        document.getElementById('room-form').style.display = 'block';
-      }
-    });
-  
-    document.getElementById('room-submit').addEventListener('click', () => {
       const roomInput = document.getElementById('room').value.trim();
-      if (roomInput !== '') {
+      if (usernameInput !== '' && roomInput !== '') {
+        username = usernameInput;
         room = roomInput;
         socket.emit('joinRoom', { username, roomCode: room });
-        document.getElementById('room-form').style.display = 'none';
+        document.getElementById('user-and-room-form').style.display = 'none';
         document.getElementById('chat').style.display = 'block';
+      } else {
+        document.getElementById('submit-join').textContent = 'Join';
       }
     });
   
