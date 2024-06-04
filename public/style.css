@@ -9,6 +9,16 @@ body {
     text-align: center;
     margin-top: 20%;
   }
+    
+  .container {
+    max-width: 500px;
+    max-height: 500px;
+    margin: 50px auto;
+    background-color: #1e1c1c;
+    padding: 50px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
   label {
     color: #a327d0;
   }
@@ -83,6 +93,17 @@ body {
     transition: 0.5s;
     padding-top: 60px;
   }
+  
+.txt{
+  font-size: 25px;
+}
+
+@media screen and (max-width: 446px) {
+ .txt{
+  font-size: 20px;
+ }
+ 
+}
   #sidebar a {
     padding: 10px 15px;
     text-decoration: none;
@@ -121,12 +142,19 @@ font-weight: bold;
 #main {
   transition: margin-left 0.5s;
 }
-@media screen and (min-width: 501px) {
+@media screen and (min-width: 564px) {
   #sidebar {
     width: 250px;
   }
 
   #main {
     margin-left: 250px;
+  }
+}
+
+
+@media screen and (max-width: 306px) {
+  input[type="text"] {
+    width: 150px;
   }
 }
