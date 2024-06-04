@@ -1,0 +1,132 @@
+body {
+    background-color: #171717; 
+    color: #ffffff; /* Text color */
+    font-family: Arial, sans-serif; /* Font family */
+    margin: 0;
+    padding: 0;
+  }
+  #username-form, #room-form {
+    text-align: center;
+    margin-top: 20%;
+  }
+  label {
+    color: #a327d0;
+  }
+  input[type="text"], button {
+    padding: 10px;
+    font-size: 16px;
+    border-radius: 5px;
+    border: none;
+    margin: 5px;
+    background-color: #363636;
+    color: #ffffff;
+  }
+  input[type="text"] {
+    width: 200px;
+  }
+  button {
+    background-color: #a327d0;
+    cursor: pointer;
+  }
+  #chat {
+    display: none;
+  }
+  #messages {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+  }
+  #messages li {
+    background-color: #363636;
+    border-radius: 5px;
+    padding: 10px;
+    margin: 5px;
+  }
+  #form-container {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background-color: #222; /* Adjust as needed */
+  padding: 10px; /* Adjust as needed */
+  box-sizing: border-box;
+  z-index: 999; /* Ensure it stays above other elements */
+}
+
+/* Style for the form elements */
+#form {
+  display: flex;
+  justify-content: space-between;
+}
+
+#input {
+  flex: 1;
+  padding: 8px; /* Adjust as needed */
+  font-size: 16px; /* Adjust as needed */
+  border: none;
+  border-radius: 5px;
+  margin-right: 10px; /* Adjust as needed */
+}
+  input[type="txt"] {
+    width: 98%;
+   
+  }
+  #sidebar {
+    height: 100%;
+    width: 0;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: #111;
+    overflow-x: hidden;
+    transition: 0.5s;
+    padding-top: 60px;
+  }
+  #sidebar a {
+    padding: 10px 15px;
+    text-decoration: none;
+    font-size: 25px;
+    color: #818181;
+    display: block;
+    transition: 0.3s;
+  }
+  #sidebar a:hover {
+    color: #f1f1f1;
+  }
+  #sidebar .close-btn {
+    position: absolute;
+    top: 0;
+    left: 25px;
+    font-size: 36px;
+    margin-right: 40px;
+  }
+  #main {
+    transition: margin-left .5s;
+    padding: 16px;
+  }
+  ::placeholder {
+   color: #a327d0;
+font-family: Arial, sans-serif;
+font-weight: bold;
+}
+#sidebar.draggable {
+  transition: none;
+}
+
+#sidebar.draggable:hover {
+  cursor: ew-resize;
+}
+
+#main {
+  transition: margin-left 0.5s;
+}
+@media screen and (min-width: 501px) {
+  #sidebar {
+    width: 250px;
+  }
+
+  #main {
+    margin-left: 250px;
+  }
+}
