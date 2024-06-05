@@ -1,24 +1,5 @@
-<body oncontextmenu="return false"  class="background">
+<body  class="background">
 
-    <script> 
-    document.onkeydown = function(e) {
-      if(event.keyCode == 123) {
-         return false;
-      }
-      if(e.ctrlKey && e.shiftKey && e.keyCode == 'I'.charCodeAt(0)) {
-         return false;
-      }
-      if(e.ctrlKey && e.shiftKey && e.keyCode == 'C'.charCodeAt(0)) {
-         return false;
-      }
-      if(e.ctrlKey && e.shiftKey && e.keyCode == 'J'.charCodeAt(0)) {
-         return false;
-      }
-      if(e.ctrlKey && e.keyCode == 'U'.charCodeAt(0)) {
-         return false;
-      }
-    }
-    </script>
     </body>
 
 <script src="https://www.gstatic.com/firebasejs/4.3.0/firebase.js"></script>
@@ -26,7 +7,7 @@
 <div id="container" style="overflow: hidden; position: fixed; height: 100vh; width: 100vw;">
 <div id="replace">
     <center> 
-        <div id="fullScreenBtn" onclick="toggleFullScreen()">
+        <div id="fullScreenBtn" onclick="toggleFullScreen()" style="color:white;">
           &#x26F6; Full Screen
         </div>
         <script>
@@ -414,6 +395,7 @@ if(e.value.length == 6){
 // Attach touch event listeners to window
 window.ontouchstart = handleTouchMove;
 window.ontouchmove = handleTouchMove;
+window.ontouchmove = onmousemove;
                     function update(time){
                         requestAnimationFrame(update);
                         ball.style.left = (data.x - data.p1.ratio * 100) + "vh";
