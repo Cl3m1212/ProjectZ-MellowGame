@@ -7,30 +7,34 @@
   <link rel="stylesheet" href="style.css">
   <link rel="icon" type="image/png" type="image/x-icon" href="logoimg.png">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/driver.js/0.9.6/driver.min.css">
+  <link rel="stylesheet" href="path/to/bootstrap/css/bootstrap.min.css">
+<link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
+
 </head>
 <body>
- 
-<div id="popup" class="popup-container">
+  <script src="https://kit.fontawesome.com/30eb1ffcab.js" crossorigin="anonymous"></script>
+  <div id="popup" class="popup-container">
     <!-- Content for the pop-up -->
     <span id="popup-message"><center> Welcome to Mellow!</center>Join the chat rooms to text and game!</span>
     <!-- Line animation -->
     <div class="popup-line"></div>
   </div>
+
     <div id="sidebar" class="draggable">
       
       <h1 style=" padding: 10px 15px;">Click or type words <br>to play!<a href="javascript:void(0)" class="close-btn" onclick="closeNav()">&times;</a></h1>
 
       <p style=" font-size: 25px; padding: 10px 15px;">Two Player player</p>
-      <a href="#" id="pong-link" onclick="openGame('pong')"><img src="1.png"> Pong</a>
-      <a href="#" id="pictionary-link" onclick="openGame('pic')"><img src="2.png"> Pictionary</a>
-      <a href="#" id="clicker-link" onclick="openGame('click')"><img src="3.png"> Clicker</a>
-      <a href="#" id="20-link" onclick="openGame('20')"><img src="4.png"> 20 Questions</a>
-      <a href="#" id="20-link" onclick="openGame('connect4')"><img src="5.png"> Connect4</a>
+      <a href="#" id="pong-link" onclick="openGame('pong')"><i class="fa-solid fa-table-tennis-paddle-ball" style="color:#a327d0"></i> Pong</a>
+      <a href="#" id="pictionary-link" onclick="openGame('pic')"><i class="fa-solid fa-pen" style="color:white"></i> Pictionary</a>
+      <a href="#" id="clicker-link" onclick="openGame('click')"><i class="fa-solid fa-computer-mouse" style="color:#a327d0"></i> Clicker</a>
+      <a href="#" id="20-link" onclick="openGame('20')"><i class="fa-solid fa-question" style="color:white"></i> 20 Questions</a>
+      <a href="#" id="20-link" onclick="openGame('connect4')"><i class="fa-solid fa-4" style="color:red"></i> Connect4</a>
       <p style="  font-size: 25px; padding: 10px 15px;">Single player</p>
-      <a href="#" id="worm-link" onclick="openGame('worm')"><img src="6.png" > Worm</a>    
+      <a href="#" id="worm-link" onclick="openGame('worm')"><i class="fa-solid fa-worm" style="color:rgba(230, 103, 0, 0.278)"></i> Worm</a>    
       <a href="#" id="simon-link" onclick="openGame('simon')"><img src="7.png"> Simon</a>
-      <a href="#" id="password-link" onclick="openGame('pwd')"><img src="8.png"> Password</a>
-      <a href="#" id="clicker-link" onclick="openGame('matching')"><img src="9.png"> Matching</a>
+      <a href="#" id="password-link" onclick="openGame('pwd')"><i class="fa-solid fa-lock" style="color:#a327d0"></i> Password</a>
+      <a href="#" id="clicker-link" onclick="openGame('matching')"><i class="fa-solid fa-puzzle-piece" style="color:rgb(106, 106, 223)"></i> Matching</a>
  
       <br>
     <br>
@@ -68,12 +72,16 @@
       </form>
       
     </div>
+    
   </div>
   <script>
     function hideIframe() {
         var iframe = document.getElementById("myIframe");
         iframe.style.display = "none";
     }
+    
+
+    
     </script>
     
   <!-- Include Driver.js library -->
@@ -191,12 +199,16 @@ function onMouseUp() {
   document.removeEventListener("mousemove", onMouseMove);
   document.removeEventListener("mouseup", onMouseUp);
 }
+
+
   </script>
   
     <script src="/socket.io/socket.io.js"></script>
   
     <!-- HTML -->
   <style>
+    
+
      .hover-pointer {
         cursor: pointer;
     }
@@ -238,7 +250,7 @@ function onMouseUp() {
       background-color: white;
       animation: lineAnimation 5s linear forwards;
     }
-  
+
     /* Animation for the line */
     @keyframes lineAnimation {
       0% { width: 0; }
