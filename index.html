@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mellow</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="icon" type="image/png" type="image/x-icon" href="logoimg.png">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/driver.js/0.9.6/driver.min.css">
+  <link rel="stylesheet" href="path/to/bootstrap/css/bootstrap.min.css">
+<link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
+
+</head>
+<body>
+  <script src="https://kit.fontawesome.com/30eb1ffcab.js" crossorigin="anonymous"></script>
+  <div id="popup" class="popup-container">
+    <!-- Content for the pop-up -->
+    <span id="popup-message"><center> Welcome to Mellow!</center>Join the chat rooms to text and game!</span>
+    <!-- Line animation -->
+    <div class="popup-line"></div>
+  </div>
+
+    <div id="sidebar" class="draggable">
+      
+      <h1 style=" padding: 10px 15px;">Click or type words <br>to play!<a href="javascript:void(0)" class="close-btn" onclick="closeNav()">&times;</a></h1>
+
+      <p style=" font-size: 25px; padding: 10px 15px;">Two Player player</p>
+      <a href="#" id="pong-link" onclick="openGame('pong')"><i class="fa-solid fa-table-tennis-paddle-ball" style="color:#a327d0"></i> Pong</a>
+      <a href="#" id="pictionary-link" onclick="openGame('pic')"><i class="fa-solid fa-pen" style="color:white"></i> Pictionary</a>
+      <a href="#" id="clicker-link" onclick="openGame('click')"><i class="fa-solid fa-computer-mouse" style="color:#a327d0"></i> Clicker</a>
+      <a href="#" id="20-link" onclick="openGame('20')"><i class="fa-solid fa-question" style="color:white"></i> 20 Questions</a>
+      <a href="#" id="20-link" onclick="openGame('connect4')"><i class="fa-solid fa-4" style="color:red"></i> Connect4</a>
+      <p style="  font-size: 25px; padding: 10px 15px;">Single player</p>
+      <a href="#" id="worm-link" onclick="openGame('worm')"><i class="fa-solid fa-worm" style="color:rgba(230, 103, 0, 0.278)"></i> Worm</a>    
+      <a href="#" id="simon-link" onclick="openGame('simon')"><img src="7.png"> Simon</a>
+      <a href="#" id="password-link" onclick="openGame('pwd')"><i class="fa-solid fa-lock" style="color:#a327d0"></i> Password</a>
+      <a href="#" id="clicker-link" onclick="openGame('matching')"><i class="fa-solid fa-puzzle-piece" style="color:rgb(106, 106, 223)"></i> Matching</a>
+ 
+      <br>
+    <br>
+    <br>
+    </div>
+    <div id="main">
+      <span style="font-size:30px;cursor:pointer" onclick="openNav()" id="open">&#9776;</span>
+<center> <h1 style="color:#a327d0;font-size:45px; font-family: Arial, sans-serif;
+  font-weight: bold">Mellow</h1></center>
+  <center><p class="txt">Join into the Chat rooms with friends <br>and have fun with Mellow!</p></center>
+      <div id="user-and-room-form" class="container"> 
+        <center>  <label for="username">Create your username:</label><br>
+        <input type="text" id="username"><br>
+        <label for="room">Enter/ Create room code:</label><br>
+        <input type="text" id="room"><br>
+      <button id="submit-join">Submit</button> </center> 
+      </div>
+      <div>
+      
+      </div>
+     
+      <div id="chat-container" class="chat-container hidden">
+        <div id="chat">
+          <ul id="messages"></ul>
+          
+          <form id="form" action="" style="bottom:0; position: fixed;">
+           
+            <input id="input" type="txt" placeholder="Game and text...">
+            <button id="sent">Send <i class="fa-solid fa-paper-plane"></i> </button>
+          </form>
+         
+        </div>
+      </div>
+    </div>
+    <footer style=" padding: 10px;">
+     
+    </footer>
+    
+  <script>
+    function hideIframe() {
+        var iframe = document.getElementById("myIframe");
+        iframe.style.display = "none";
+    }
+    
+
+    
+    </script>
+    
+  <!-- Include Driver.js library -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/driver.js/0.9.6/driver.min.js"></script>
+  <script>
+    
+    document.addEventListener("DOMContentLoaded", function() {
+    const links = document.querySelectorAll("#sidebar a");
+
+    links.forEach(link => {
+      // Exclude specific element
+      if (!link.classList.contains('close-btn')) {
+        link.addEventListener("click", function(event) {
+          event.preventDefault(); // Prevent the default behavior of the link
+          
+          // Copy the text content of the link to the clipboard
+          const linkText = link.textContent.trim();
+          navigator.clipboard.writeText(linkText)
+            .then(() => {
+              console.log(`Copied: ${linkText}`);
+              showPopup(`Type the copied text "${linkText}" and send it to the chat to play!`);
+            })
+            .catch(err => {
+              console.error('Failed to copy: ', err);
+            });
+        });
+      }
+    });
+  
+        // Define the steps for the tutorial
+        if (!localStorage.getItem('tutorialCompleted')) {
+        const driver = new Driver({
+            opacity: 0.8,
+            padding: 3,
+            allowClose: true,
+            stageBackground: 'rgba(163,125,208,0)',
+            nextBtnText: 'Next',
+            prevBtnText: 'Previous',
+            doneBtnText: 'Done',
+            
+        });
+
+        const steps = [
+            {
+                element: '#username-form',
+                popover: {
+                    title: 'Username',
+                    description: 'Complete the Steps first! Create your username here then submit and press the next button.',
+                    position: 'bottom-center',
+                }
+            },
+            {
+                element: '#room-form',
+                popover: {
+                    title: 'Room Code',
+                    description: 'Enter the room code here to join then submit.',
+                    position: 'bottom-center'
+                }
+            },
+            {
+                element: '.close-btn',
+                popover: {
+                    title: 'Nav Bar',
+                    description: 'Open and find Games here',
+                    position: 'right'
+                }
+            },
+            {
+                element: '#sent',
+                popover: {
+                    title: 'Chat',
+                    description: 'Type and send messages to chat and game with friends',
+                    position: 'bottom'
+                }
+            }
+        ];
+
+        // Start the tutorial
+        driver.defineSteps(steps);
+        driver.start();
+
+        // Set a flag in local storage indicating the tutorial has been completed
+        localStorage.setItem('tutorialCompleted', true);
+    }
+});
+
+var isDragging = false;
+
+function toggleNav() {
+  var sidebar = document.getElementById("sidebar");
+  if (sidebar.style.width === "500px") {
+    closeNav();
+  } else {
+    openNav();
+  }
+}
+
+
+document.getElementById("sidebar").addEventListener("mousedown", function(event) {
+  isDragging = true;
+  document.addEventListener("mousemove", onMouseMove);
+  document.addEventListener("mouseup", onMouseUp);
+});
+
+function onMouseMove(event) {
+  if (isDragging) {
+    var sidebar = document.getElementById("sidebar");
+    sidebar.style.width = event.clientX + "px";
+    document.getElementById("main").style.marginLeft = event.clientX + "px";
+  }
+}
+
+function onMouseUp() {
+  isDragging = false;
+  document.removeEventListener("mousemove", onMouseMove);
+  document.removeEventListener("mouseup", onMouseUp);
+}
+
+
+  </script>
+  
+    <script src="/socket.io/socket.io.js"></script>
+  
+    <!-- HTML -->
+  <style>
+    
+
+     .hover-pointer {
+        cursor: pointer;
+    }
+    /* Style for the pop-up container */
+    .popup-container {
+      position: fixed;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      background-color: #333;
+      color: white;
+      padding: 10px 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+      z-index: 1000;
+      animation: slideIn 0.5s ease forwards, slideOut 0.5s ease forwards 4s;
+    }
+  
+    /* Animation for sliding in */
+    @keyframes slideIn {
+      from { transform: translateX(-50%) translateY(100%); opacity: 0; }
+      to { transform: translateX(-50%) translateY(0); opacity: 1; }
+    }
+  
+    /* Animation for sliding out */
+    @keyframes slideOut {
+      from { transform: translateX(-50%) translateY(0); opacity: 1; }
+      to { transform: translateX(-50%) translateY(100%); opacity: 0; }
+    }
+  
+    /* Style for the line at the bottom */
+    .popup-line {
+      position: absolute;
+      bottom: -10px;
+      left: 50%;
+      width: 100%;
+      transform: translateX(-50%);
+      height: 2px;
+      background-color: white;
+      animation: lineAnimation 5s linear forwards;
+    }
+
+    /* Animation for the line */
+    @keyframes lineAnimation {
+      0% { width: 0; }
+      100% { width: 100%; }
+    }
+    @media screen and (max-width: 500px) {
+      body {
+        overflow-x: hidden;
+      }
+    }
+    html, body {
+      overflow-x: hidden;
+    }
+  </style>
+  
+  
+    
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
