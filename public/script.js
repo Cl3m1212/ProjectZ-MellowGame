@@ -13,6 +13,7 @@ document.addEventListener('DOMContentLoaded', () => {
         socket.emit('joinRoom', { username, roomCode: room });
         document.getElementById('user-and-room-form').style.display = 'none';
         document.getElementById('chat').style.display = 'block';
+        document.getElementById('chat-container').style.display = 'block';
       } else {
         document.getElementById('submit-join').textContent = 'Join';
       }
@@ -154,6 +155,7 @@ socket.on('chat message', (msg) => {
     document.getElementById('messages').appendChild(iframe);
     createCloseButton(iframe);
 
+    
     // Scroll to the bottom of the chat
     window.scrollTo(0, document.body.scrollHeight);
 }
@@ -217,15 +219,15 @@ socket.on('chat message', (msg) => {
 }
 
 
-  function openNav() {
-    if (window.innerWidth <= 500) {
-      document.getElementById("sidebar").style.width = "500px";
-      document.getElementById("main").style.marginLeft = "500px";
-    } else {
-      document.getElementById("sidebar").style.width = "250px";
-      document.getElementById("main").style.marginLeft = "250px";
-    }
+function openNav() {
+  if (window.innerWidth <= 500) {
+    document.getElementById("sidebar").style.width = "500px";
+    document.getElementById("main").style.marginLeft = "500px";
+  } else {
+    document.getElementById("sidebar").style.width = "250px";
+    document.getElementById("main").style.marginLeft = "250px";
   }
+}
   
   function closeNav() {
     document.getElementById("sidebar").style.width = "0";

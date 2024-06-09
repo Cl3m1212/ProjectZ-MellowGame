@@ -55,25 +55,24 @@
       <div>
       
       </div>
-      
-    <div id="chat">
-  
-      <ul id="messages"></ul>
-      
-      <form id="form" action="">
-        <input id="input"  type="txt" placeholder="Game and text...">
-        
-        <button id="sent">Send</button>
-       
-    <!--    
-        <p id="closeButton"  class="hover-pointer">X</p>
-  Your Pong game content here --> 
- 
-      </form>
-      
+     
+      <div id="chat-container" class="chat-container hidden">
+        <div id="chat">
+          <ul id="messages"></ul>
+          
+          <form id="form" action="" style="bottom:0; position: fixed;">
+           
+            <input id="input" type="txt" placeholder="Game and text...">
+            <button id="sent">Send <i class="fa-solid fa-paper-plane"></i> </button>
+          </form>
+         
+        </div>
+      </div>
     </div>
+    <footer style=" padding: 10px;">
+     
+    </footer>
     
-  </div>
   <script>
     function hideIframe() {
         var iframe = document.getElementById("myIframe");

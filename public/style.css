@@ -18,6 +18,7 @@ body {
     padding: 50px;
     border-radius: 10px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+
 }
   label {
     color: #a327d0;
@@ -50,8 +51,9 @@ body {
     background-color: #363636;
     border-radius: 5px;
     padding: 10px;
-    margin: 5px;
+    margin: 10px;
   }
+  
   #form-container {
   position: absolute;
   bottom: 0;
@@ -60,13 +62,34 @@ body {
   background-color: #222; /* Adjust as needed */
   padding: 10px; /* Adjust as needed */
   box-sizing: border-box;
-  z-index: 999; /* Ensure it stays above other elements */
+  z-index: 999;  /* Ensure it stays above other elements */
+}
+.chat-container {
+ 
+  height: 70vh; 
+  margin: 20px auto;
+  padding: 20px;
+  border: 2px solid #a327d0;
+  border-radius: 10px;
+  background-color: #1e1e1e;
+  display: none; /* Hidden initially */
+  overflow-y: auto; /* Enable vertical scrolling */
+
 }
 
+
+#messages {
+  max-height: calc(100% - 60px); /* Adjust to fit the container, leave space for form */
+  overflow-y: auto; /* Enable vertical scrolling for messages */
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
 /* Style for the form elements */
 #form {
   display: flex;
   justify-content: space-between;
+  width: -moz-available;
 }
 
 #input {
@@ -76,11 +99,14 @@ body {
   border: none;
   border-radius: 5px;
   margin-right: 10px; /* Adjust as needed */
+ bottom:0;
+
 }
   input[type="txt"] {
     width: 98%;
    
   }
+
   #sidebar {
     height: 100%;
     width: 0;
@@ -95,7 +121,7 @@ body {
   }
   
 .txt{
-  font-size: 25px;
+  font-size: 18px;
 }
 
 @media screen and (max-width: 446px) {
